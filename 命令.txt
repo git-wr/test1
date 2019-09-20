@@ -1,0 +1,115 @@
+unalias 别名名称                                         //取消以设置别名
+
+firewall-cmd --get-default-zone                //查看防火墙默认区域
+firewall-cmd --set-default-zone=               //修改默认区域
+firewall-cmd --zone=public --list-all          //查看区域规则(指区域中可进行的服务)
+firewall-cmd --zone=public --add-service=http  //添加http协议,使public下可以进行web服务 --permanent永久添加
+firewall-cmd --reload                          //重新加载防火墙的所有配置
+
+修改selinux策略 非默认端口开放
+semanage port -l  | grep http  #查看允许的端口
+semanage port -a -t http_port_t  -p tcp 8909
+   -a:添加   -t：类型   -p：协议
+
+SELinux 安全上下文（标签起到标识）   布尔值    非默认端口的开放
+semanage --help
+semanage fcontext -l   |  less   #查看所有的安全上下文
+ls -Zd /var/www/    #查看目录的上下文值
+ls -Zd /webroot/    #查看目录的上下文值
+chcon [-R] --reference=模板目录    新目录     //将模板的上下文值(标签)赋予新目录
+
+qq
+
+yum list installed             //查看已安装的软件包
+rpm -qa                        //查看已安装的软件包 (区别?)
+
+crontab -l                     //查看已有的计划任务
+
+ping -c 3                      //ping 3次(-i ping的频率 -w 反馈时间)
+
+RANDOM                        //产生随机数的变量
+
+netstat -ntulp                 //查看服务状态
+
+grep -q                         //筛选后不输出信息
+
+echo -e "\033[41mABC\033[0m"    //改变输出的颜色(40m改变输出背景颜色,30m改变输出颜色)
+
+• tar 集成备份工具
+– -c:创建归档
+– -x:释放归档
+– -f:指定归档文件名称
+– -z、-j、-J:调用 .gz、.bz2、.xz格式的工具进行处理
+– -t:显示归档中的文件清单
+– -C(大写):指定释放路径
+
+ yum clean all                  //清空Yum的缓存
+
+netstat -ntulp | grep :80        //过滤80端口
+
+yum-config-manager --add  软件包地址  //自动生成yum源
+
+man nmcli-examples     查/team1      //聚合链路man帮助 
+man teamd.conf         查/example
+
+rsync同步操作
+• 命令用法
+– rsync [选项...] 源目录 目标目录
+• 同步与复制的差异
+– 复制:完全拷贝源到目标
+– 同步:增量拷贝,只传输变化过的数据
+rsync操作选项
+– -n:测试同步过程,不做实际修改
+– --delete:删除目标文件夹内多余的文档
+– -a:归档模式,相当于-rlptgoD
+– -v:显示详细操作信息
+– -z:传输过程中启用压缩/解压
+
+ inotifywait [选项] 目标文件夹
+• 常用命令选项
+– -m,持续监控(捕获一个事件后不退出)
+– -r,递归监控、包括子目录及文件
+– -q,减少屏幕输出信息
+– -e,指定监视的 modify、move、create、delete、attrib等事件
+
+sort -u/-n 文本       //去重,排序
+uniq -c             //去重
+
+计算字符串长度
+expr length 变量
+echo ${#变量}
+计算数组长度
+echo ${#变量[*]}
+
+mysql -e "命令"(select)  //脚本中调用数据库命令
+
+rpm -qc 软件名   //查软件的配置文件
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
